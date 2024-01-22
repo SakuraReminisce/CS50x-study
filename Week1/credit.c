@@ -9,35 +9,36 @@ int main(void)
     {
         num = get_long("Number: ");
     }
-    while (num <= 0);
+    while (num == 0);
 
     //验证卡号是否正确
-    int checksum = 0;
+    int sum = 0;
     long checknum = num / 10;
     while (checknum > 0)
     {
         int remainder = checknum % 10 * 2;
         if (remainder < 10)
         {
-            checksum += remainder;
+            sum += remainder;
         }
         else
         {
-            checksum += remainder % 10;
+            sum += remainder % 10;
             remainder /= 10;
-            checksum += remainder;
+            sum += remainder;
         }
         checknum /= 100;
     }
 
+    //重新获取num的值
     checknum = num;
     while (checknum > 0)
     {
-        checksum += checknum % 10;
+        sum += checknum % 10;
         checknum /= 100;
     }
 
-    if (checksum % 10 != 0)
+    if (sum % 10 != 0)
     {
         printf("INVALID\n");
     }
